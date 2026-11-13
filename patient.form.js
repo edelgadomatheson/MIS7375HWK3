@@ -494,10 +494,12 @@ function updateErrorSummary() {
     const errorSpans = document.querySelectorAll(".error");
     let errorCount = 0;
     errorSpans.forEach(span => {
-        if (span.textContent.trim() !== "") {
-            errorCount++;
-        }
-    });
+    if (span.textContent.trim() !== "") {
+        errorCount++;
+     }
+       });
+
+     errorCount = Math.max(0, errorCount - 1);
     const summary = document.getElementById("errorSummary");
     const submitBtn = document.getElementById("submitBtn");
     if (errorCount > 0) {
