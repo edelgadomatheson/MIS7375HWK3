@@ -145,3 +145,10 @@ body{
     font-size: 12px;
     margin-left: 10px;
 }
+
+#errorSummary {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    color: red;
+}
