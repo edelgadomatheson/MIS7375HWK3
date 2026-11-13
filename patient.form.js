@@ -156,7 +156,6 @@ emailField.addEventListener('input', () => {
     else {
         error.textContent = "";
     }
-    updateErrorSummary();
 });
 
 const userIDField = document.querySelector('input[name="userID"]');
@@ -493,27 +492,26 @@ function formatResult(label, value, pass) {
 function updateErrorSummary() {
 
     const errorSpans = document.querySelectorAll(".error");
-
     let errorCount = 0;
-
     errorSpans.forEach(span => {
-
         if (span.textContent.trim() !== "") {
-
-            console.log(
-                "Counting:",
-                span.id,
-                "Message:",
-                span.textContent
-            );
-
             errorCount++;
         }
-
     });
-
-    console.log("Final Error Count:", errorCount);
+    const summary = document.getElementById("errorSummary");
+    const submitBtn = document.getElementById("submitBtn");
+    if (errorCount > 0) {
+        summary.textContent = `⚠ ${errorCount} Error(s) Remaining`;
+        summary.style.color = "red";
+        submitBtn.disabled = true;
+    }
+    else {
+        summary.textContent = "✓ No Errors Found - Ready To Submit";
+        summary.style.color = "green";
+        submitBtn.disabled = false;
+    }
 }
+
 reviewButton.addEventListener("click", function () {
     const firstName = document.querySelector('input[name="firstName"]').value.trim();
     const middleInitial = document.querySelector('input[name="middleInitial"]').value.trim();
