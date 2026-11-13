@@ -494,20 +494,52 @@ function updateErrorSummary() {
     const errorSpans = document.querySelectorAll(".error");
     let errorCount = 0;
     errorSpans.forEach(span => {
-    if (span.textContent.trim() !== "") {
-        errorCount++;
-     }
-       });
+        if (span.textContent.trim() !== "") {
+            errorCount++;
+        }
+    });
+    errorCount = Math.max(0, errorCount - 1);
+   
+    const firstName = document.querySelector('input[name="firstName"]').value.trim();
+    const lastName = document.querySelector('input[name="lastName"]').value.trim();
+    const dob = document.querySelector('input[name="dob"]').value;
+    const gender = document.querySelector('select[name="gender"]').value;
+    const ssn = document.querySelector('input[name="ssn"]').value.trim();
+    const address1 = document.querySelector('input[name="address1"]').value.trim();
+    const city = document.querySelector('input[name="city"]').value.trim();
+    const state = document.querySelector('select[name="state"]').value;
+    const zip = document.querySelector('input[name="zip"]').value.trim();
+    const email = document.querySelector('input[name="email"]').value.trim();
+    const userID = document.querySelector('input[name="userID"]').value.trim();
+    const password = document.querySelector('input[name="password"]').value;
+    const confirmPassword = document.querySelector('input[name="confirmPassword"]').value;
+    const requiredFieldsComplete =
+        firstName !== "" &&
+        lastName !== "" &&
+        dob !== "" &&
+        gender !== "" &&
+        ssn !== "" &&
+        address1 !== "" &&
+        city !== "" &&
+        state !== "" &&
+        zip !== "" &&
+        email !== "" &&
+        userID !== "" &&
+        password !== "" &&
+        confirmPassword !== "";
 
-     errorCount = Math.max(0, errorCount - 1);
     const summary = document.getElementById("errorSummary");
     const submitBtn = document.getElementById("submitBtn");
+
     if (errorCount > 0) {
         summary.textContent = `⚠ ${errorCount} Error(s) Remaining`;
         summary.style.color = "red";
         submitBtn.disabled = true;
-    }
-    else {
+    } else if (!requiredFieldsComplete) {
+        summary.textContent = "Please complete all required fields.";
+        summary.style.color = "orange";
+        submitBtn.disabled = true;
+    } else {
         summary.textContent = "✓ No Errors Found - Ready To Submit";
         summary.style.color = "green";
         submitBtn.disabled = false;
