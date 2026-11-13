@@ -26,7 +26,9 @@ firstNameInput.addEventListener('input', () => {
         error.style.color = "red";
     } else {
         error.textContent = "";
+    
     }
+  updateErrorSummary();
 });
 
 const miField = document.querySelector('input[name="middleInitial"]');
@@ -37,6 +39,7 @@ miField.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const lastNameField = document.querySelector('input[name="lastName"]');
@@ -47,6 +50,7 @@ lastNameField.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const dobField2 = document.querySelector('input[name="dob"]');
@@ -57,6 +61,7 @@ dobField2.addEventListener('blur', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const genderField = document.querySelector('select[name="gender"]');
@@ -67,6 +72,7 @@ genderField.addEventListener('change', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const ssnField = document.querySelector('input[name="ssn"]');
@@ -77,6 +83,7 @@ ssnField.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const address1Field = document.querySelector('input[name="address1"]');
@@ -87,6 +94,7 @@ address1Field.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const address2Field = document.querySelector('input[name="address2"]');
@@ -97,6 +105,7 @@ address2Field.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const cityField = document.querySelector('input[name="city"]');
@@ -107,6 +116,7 @@ cityField.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 
@@ -118,6 +128,7 @@ stateField.addEventListener('change', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const zipField = document.querySelector('input[name="zip"]');
@@ -128,6 +139,7 @@ zipField.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const emailField = document.querySelector('input[name="email"]');
@@ -138,6 +150,7 @@ emailField.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const userIDField = document.querySelector('input[name="userID"]');
@@ -148,6 +161,7 @@ userIDField.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const passwordField = document.querySelector('input[name="password"]');
@@ -203,6 +217,7 @@ confirmPasswordField.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const symptomsField = document.querySelector('textarea[name="symptoms"]');
@@ -213,6 +228,7 @@ symptomsField.addEventListener('input', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 const insuranceFields = document.querySelectorAll('input[name="insurance"]');
@@ -225,6 +241,7 @@ insuranceFields.forEach(radio => {
         } else {
             error.textContent = "";
         }
+      updateErrorSummary();
     });
 });
 
@@ -236,6 +253,7 @@ sliderField.addEventListener('change', () => {
     } else {
         error.textContent = "";
     }
+  updateErrorSummary();
 });
 
 
@@ -465,6 +483,28 @@ function formatResult(label, value, pass) {
     return `<p><strong>${label}:</strong> ${value} — <span style="color:${pass ? 'green' : 'red'}">${status}</span></p>`;
 }
 
+function updateErrorSummary() {
+
+    const errorSpans = document.querySelectorAll(".error");
+    let errorCount = 0;
+    errorSpans.forEach(span => {
+        if (span.textContent.trim() !== "") {
+            errorCount++;
+        }
+    });
+    const summary = document.getElementById("errorSummary");
+    const submitBtn = document.getElementById("submitBtn");
+    if (errorCount > 0) {
+        summary.textContent = `⚠ ${errorCount} Error(s) Remaining`;
+        summary.style.color = "red";
+        submitBtn.disabled = true;
+    }
+    else {
+        summary.textContent = "✓ No Errors Found - Ready To Submit";
+        summary.style.color = "green";
+        submitBtn.disabled = false;
+    }
+}
 reviewButton.addEventListener("click", function () {
     const firstName = document.querySelector('input[name="firstName"]').value.trim();
     const middleInitial = document.querySelector('input[name="middleInitial"]').value.trim();
@@ -515,3 +555,12 @@ reviewArea.innerHTML = `
 
 `;
 });
+
+
+
+
+
+
+
+
+
