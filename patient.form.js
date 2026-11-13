@@ -77,13 +77,23 @@ genderField.addEventListener('change', () => {
 
 const ssnField = document.querySelector('input[name="ssn"]');
 ssnField.addEventListener('input', () => {
+    let value = ssnField.value.replace(/\D/g, '');
+    value = value.substring(0, 9);
+    if (value.length > 5) {
+        value = `${value.slice(0,3)}-${value.slice(3,5)}-${value.slice(5)}`;
+    }
+    else if (value.length > 3) {
+        value = `${value.slice(0,3)}-${value.slice(3)}`;
+    }
+    ssnField.value = value;
     const error = document.getElementById("ssnError");
-    if (!validateSSN(ssnField.value)) {
-        error.textContent = "SSN must be 9 digits.";
+    const digitsOnly = value.replace(/\D/g, '');
+    if (digitsOnly.length !== 9) {
+        error.textContent = "SSN must contain 9 digits.";
     } else {
         error.textContent = "";
     }
-  updateErrorSummary();
+    updateErrorSummary();
 });
 
 const address1Field = document.querySelector('input[name="address1"]');
@@ -392,11 +402,10 @@ function validateGender(gender) {
     return gender !== "" && gender !== "--Select Gender--";
 }
 
-
-// SSN Validation
+//SSN validation
 function validateSSN(ssn) {
-    const regex = /^\d{9}$/;
-    return regex.test(ssn.trim());
+     const digitsOnly = ssn.replace(/\D/g, '');
+    return digitsOnly.length === 9;
 }
 
 // Address1 Validation
