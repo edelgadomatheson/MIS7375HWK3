@@ -145,12 +145,18 @@ zipField.addEventListener('input', () => {
 const emailField = document.querySelector('input[name="email"]');
 emailField.addEventListener('input', () => {
     const error = document.getElementById("emailError");
-    if (!validateEmail(emailField.value)) {
-        error.textContent = "Invalid email format.";
-    } else {
+    const value = emailField.value.trim();
+    // Don't complain until user actually types something
+    if (value === "") {
         error.textContent = "";
     }
-  updateErrorSummary();
+    else if (!validateEmail(value)) {
+        error.textContent = "Invalid email format.";
+    }
+    else {
+        error.textContent = "";
+    }
+    updateErrorSummary();
 });
 
 const userIDField = document.querySelector('input[name="userID"]');
