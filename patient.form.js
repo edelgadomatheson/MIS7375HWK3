@@ -507,8 +507,6 @@ function updateErrorSummary() {
     });
 
     console.log("Final Error Count:", errorCount);
-
-    ...
 }
 reviewButton.addEventListener("click", function () {
     const firstName = document.querySelector('input[name="firstName"]').value.trim();
