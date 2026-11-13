@@ -314,8 +314,9 @@ if (dobField) {
 
 
  const form = document.querySelector('form');
-//Submit the form js
 form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
     let errors = [];
 
     const firstName = document.querySelector('input[name="firstName"]').value.trim();
@@ -341,19 +342,20 @@ form.addEventListener('submit', (e) => {
     }
 
     const confirmPasswordValue = document.querySelector('input[name="confirmPassword"]').value;
+
     if (!validateConfirmPassword(passwordValue, confirmPasswordValue)) {
         errors.push("Passwords do not match.");
         document.getElementById("confirmPasswordError").textContent = "Passwords do not match.";
     }
+
     if (errors.length > 0) {
-        e.preventDefault();
         alert("Please fix the errors before submitting.");
         return;
     }
 
     window.location.href = "thankyou.html";
-});
 
+});
 //js for the slider to adjust its value live
 const slider = document.getElementById("healthSlider");
 const output = document.getElementById("healthValue");
