@@ -351,7 +351,7 @@ form.addEventListener('submit', (e) => {
         return;
     }
 
-    alert("Form submitted successfully!");
+    window.location.href = "thankyou.html";
 });
 
 //js for the slider to adjust its value live
