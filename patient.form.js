@@ -75,23 +75,39 @@ genderField.addEventListener('change', () => {
   updateErrorSummary();
 });
 
+// SSN field
 const ssnField = document.querySelector('input[name="ssn"]');
+
 ssnField.addEventListener('input', () => {
+
     let value = ssnField.value.replace(/\D/g, '');
+
     value = value.substring(0, 9);
+
     if (value.length > 5) {
         value = `${value.slice(0,3)}-${value.slice(3,5)}-${value.slice(5)}`;
     }
     else if (value.length > 3) {
         value = `${value.slice(0,3)}-${value.slice(3)}`;
     }
+
     ssnField.value = value;
+
+});
+
+ssnField.addEventListener('blur', () => {
+
     const error = document.getElementById("ssnError");
-    const digitsOnly = value.replace(/\D/g, '');
-    if (digitsOnly.length !== 9) {
+
+    if (!validateSSN(ssnField.value)) {
+
         error.textContent = "SSN must contain 9 digits.";
-    } else {
+        ssnField.style.border = "2px solid red";
+
+    }
+    else {
         error.textContent = "";
+        ssnField.style.border = "2px solid green";
     }
     updateErrorSummary();
 });
