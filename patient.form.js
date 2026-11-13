@@ -483,27 +483,32 @@ function formatResult(label, value, pass) {
     return `<p><strong>${label}:</strong> ${value} — <span style="color:${pass ? 'green' : 'red'}">${status}</span></p>`;
 }
 
+
 function updateErrorSummary() {
 
     const errorSpans = document.querySelectorAll(".error");
+
     let errorCount = 0;
+
     errorSpans.forEach(span => {
+
         if (span.textContent.trim() !== "") {
+
+            console.log(
+                "Counting:",
+                span.id,
+                "Message:",
+                span.textContent
+            );
+
             errorCount++;
         }
+
     });
-    const summary = document.getElementById("errorSummary");
-    const submitBtn = document.getElementById("submitBtn");
-    if (errorCount > 0) {
-        summary.textContent = `⚠ ${errorCount} Error(s) Remaining`;
-        summary.style.color = "red";
-        submitBtn.disabled = true;
-    }
-    else {
-        summary.textContent = "✓ No Errors Found - Ready To Submit";
-        summary.style.color = "green";
-        submitBtn.disabled = false;
-    }
+
+    console.log("Final Error Count:", errorCount);
+
+    ...
 }
 reviewButton.addEventListener("click", function () {
     const firstName = document.querySelector('input[name="firstName"]').value.trim();
